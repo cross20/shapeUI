@@ -24,11 +24,16 @@ class Triangle implements Shape {
 	}
 	
 	public String getDetailString() {
+		int sideOneInt = Integer.parseInt(sideOne);
+		int sideTwoInt = Integer.parseInt(sideTwo);
+		double area = 0.5 * sideOneInt * sideTwoInt;
+		
 		String circleString = "<html>";
 		circleString += shapeKind + " (ID# " + triangleID + ")<br>";
 		circleString += "Side One Length: " + sideOne + "<br>";
 		circleString += "Side Two Length: " + sideTwo + "<br>";
 		circleString += "Side Three Length: " + sideThree + "<br>";
+		circleString +=  "Area: " + area + "<br>";
 		circleString += "Color: " + color;
 		circleString += "</html>";
 		return circleString;
@@ -39,25 +44,23 @@ class Triangle implements Shape {
 	}
 	
 	public void readFile(int lineNumber) {
+		// Open the file "shapes.csv" to read the shape data from it. It is up to the
+		// user of readFile(int lineNumber) to determine which shapes are at which line numbers.
 		String currentDirectory = System.getProperty("user.dir");
 		
-		try(FileInputStream is = new FileInputStream("/Users/Chad/Documents/Whitworth/2018-19/Jan_Term/ShapeUI/src/shapes.csv")) {
+		try(FileInputStream is = new FileInputStream(currentDirectory + "/src/shapes.csv")) {
         	InputStreamReader ir = new InputStreamReader(is);
             BufferedReader rdr = new BufferedReader(ir);
             String line = rdr.readLine();
             int lineTracker = 1;
             
+            // Read in data until the end of the file.
             while(line != null) {
 				parts = line.split(",");
                 
+				// If the desired shape is found, set the shape data to "this".
                 if(lineTracker == lineNumber) {
-                	for(String p : parts) {
-                        if(!p.isBlank()) {
-                            System.out.printf("%s, ", p);
-                        }
-                    }
                 	setAll();
-                    System.out.println();
                 }
                 line = rdr.readLine();
                 lineTracker++;
@@ -72,6 +75,14 @@ class Triangle implements Shape {
 		sideOne = parts[2];
 		sideTwo = parts[3];
 		sideThree = parts[4];
-		color = parts[5];
+		String tempColor = parts[5];
+		color = "";
+		for(int i = 0; i < tempColor.length(); i++) {
+			if(tempColor.charAt(i) == '\"' || tempColor.charAt(i) == ' ') {
+				
+			} else {
+				color += tempColor.charAt(i);
+			}
+		}
     }
 }

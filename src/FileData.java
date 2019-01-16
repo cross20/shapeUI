@@ -41,23 +41,22 @@ class FileData {
 	}
 	
 	public String getShapeType(int lineNumber) {
-String currentDirectory = System.getProperty("user.dir");
+		// Open the file "shapes.csv" to read the shape data from it. It is up to the
+		// user of readFile(int lineNumber) to determine which shapes are at which line numbers.
+		String currentDirectory = System.getProperty("user.dir");
 		
-		try(FileInputStream is = new FileInputStream("/Users/Chad/Documents/Whitworth/2018-19/Jan_Term/ShapeUI/src/shapes.csv")) {
+		try(FileInputStream is = new FileInputStream(currentDirectory + "/src/shapes.csv")) {
         	InputStreamReader ir = new InputStreamReader(is);
             BufferedReader rdr = new BufferedReader(ir);
             String line = rdr.readLine();
             int lineTracker = 0;
             
+            // Read in data until the end of the file.
             while(line != null) {
 				parts = line.split(",");
                 
+				// If the desired shape is found, set the shape data to "this".
                 if(lineTracker == lineNumber) {
-                	for(String p : parts) {
-                        if(!p.isBlank()) {
-                            System.out.printf("%s, ", p);  
-                        }
-                    }
                 	return parts[0];
                 }
             	
@@ -71,27 +70,19 @@ String currentDirectory = System.getProperty("user.dir");
 	}
 	
 	private void findNumShapes() {
-		int lineNumber = 1;
+		// Open the file "shapes.csv" to read the shape data from it.
 		String currentDirectory = System.getProperty("user.dir");
 		
-		try(FileInputStream is = new FileInputStream("/Users/Chad/Documents/Whitworth/2018-19/Jan_Term/ShapeUI/src/shapes.csv")) {
+		try(FileInputStream is = new FileInputStream(currentDirectory + "/src/shapes.csv")) {
         	InputStreamReader ir = new InputStreamReader(is);
             BufferedReader rdr = new BufferedReader(ir);
             String line = rdr.readLine();
-            int lineTracker = 1;
             
+            // Read in data until the end of the file.
             while(line != null) {
 				parts = line.split(",");
                 
-                if(lineTracker == lineNumber) {
-                	for(String p : parts) {
-                        if(!p.isBlank()) {
-                            System.out.printf("%s, ", p);  
-                        }
-                    }
-                    System.out.println();
-                }
-                
+				// Whenever a certain type of shape is found, increment the applicable variable.
                 switch(parts[0]) {
                 case "circle":
                 	numCircles++;
@@ -110,7 +101,6 @@ String currentDirectory = System.getProperty("user.dir");
             	numShapes++;
             	
                 line = rdr.readLine();
-                lineTracker++;
             }
         }
         catch (Exception ex) { System.out.printf("Failed for %s in FileData.java\n", "shapes.csv"); }
