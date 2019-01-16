@@ -129,7 +129,7 @@ public class ShapeUI implements MouseListener {
 		frame.getContentPane().add(infoImageLabel);
 		
 		// Text to display the shape properties.
-		infoTextLabel = new JLabel("No data found.");
+		infoTextLabel = new JLabel("Select a shape on the left to see its properties.");
 		infoTextLabel.setVerticalAlignment(SwingConstants.TOP);
 		infoTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoTextLabel.setBounds(175, 198, 340, 203);
