@@ -14,10 +14,7 @@ class Square implements Shape {
 	}
 	
 	public String toString() {
-		String squareString = "<html>";
-		squareString += shapeKind + "(ID#" + squareID.toString() + ")<br>";
-		squareString += "</html>";
-		return squareString;
+		return shapeKind + " (" + squareID.toString() + ")";
 	}
 	
 	public String getKind() {
@@ -26,6 +23,7 @@ class Square implements Shape {
 	
 	public String getDetailString() {
 		String circleString = "<html>";
+		circleString += shapeKind + " (ID# " + squareID + ")<br>";
 		circleString += "Demensions: " + sideLength + "x" + sideLength + "<br>";
 		circleString += "Color: " + color;
 		circleString += "</html>";
@@ -39,7 +37,7 @@ class Square implements Shape {
 	public void readFile(int lineNumber) {
 		String currentDirectory = System.getProperty("user.dir");
 		
-		try(FileInputStream is = new FileInputStream(currentDirectory + "/shapes.csv")) {
+		try(FileInputStream is = new FileInputStream("/Users/Chad/Documents/Whitworth/2018-19/Jan_Term/ShapeUI/src/shapes.csv")) {
         	InputStreamReader ir = new InputStreamReader(is);
             BufferedReader rdr = new BufferedReader(ir);
             String line = rdr.readLine();
@@ -61,7 +59,7 @@ class Square implements Shape {
                 lineTracker++;
             }
         }
-        catch (Exception ex) { System.out.printf("Failed for %s\n", "shapes.csv"); }
+        catch (Exception ex) { System.out.printf("Failed for %s in Square\n", "shapes.csv"); }
 	}
 	
 	private void setAll() {
