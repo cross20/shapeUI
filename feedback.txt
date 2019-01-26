@@ -1,0 +1,11 @@
+Read from the file correctly: 20/20%
+Implement class hierarchy correctly: 20/20%
+Populate appropriate data structures with shape data: 10/15%
+Show list of shapes correctly: 15/15%
+Show specific shape properties correctly: 15/15%
+Well-structured, well-commented code: 15/15%
+
+
+Comments:
+  Don't really need String toString(); on the Shape interface, since it's defined in Object.
+  Really should only read the file once, into an ArrayList<Shape>. Reading the file multiple times is wasteful. -5
