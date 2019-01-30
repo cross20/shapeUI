@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+// This is a test.
+
 class Rectangle implements Shape {
 	private String shapeKind;
 	private Integer rectangleID;
